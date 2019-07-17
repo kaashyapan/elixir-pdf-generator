@@ -188,7 +188,6 @@ defmodule PdfGenerator do
   def make_command(:chrome, options, content, {html_path, pdf_path}) do
     chrome_executable = PdfGenerator.PathAgent.get().chrome_path
     node_executable = PdfGenerator.PathAgent.get().node_path
-    IO.inspect(node_executable)
 
     disable_sandbox =
       Application.get_env(:pdf_generator, :disable_chrome_sandbox) || options[:no_sandbox]
@@ -265,7 +264,9 @@ defmodule PdfGenerator do
       end
 
     {executable, arguments} |> inspect() |> Logger.debug()
+
     {executable, arguments}
+    |> IO.inspect()
   end
 
   defp maybe_delete_temp(true, file), do: File.rm(file)
